@@ -14,13 +14,15 @@ public class Util {
 
 
     public Util(){
-        try {
-            connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-            if(!connection.isClosed()){
-                System.out.println("Подключение успешно");
+        if ( connection == null ) {
+            try {
+                connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                if ( !connection.isClosed() ) {
+                    System.out.println("Подключение успешно");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
